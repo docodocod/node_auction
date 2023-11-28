@@ -9,7 +9,7 @@ exports.renderMain = async (req, res, next) => {
         const goods = await Good.findAll({
             where: { SoldId: null, createdAt: { [Op.gte]: yesterday } },
         });
-        res.render('main', {
+        res.render('main', { //main페이지에다가 뿌려줄 데이터
             title: 'NodeAuction',
             goods,
         });

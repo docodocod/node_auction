@@ -1,6 +1,7 @@
 const express=require('express');
-const {isLoggedIn, isNotLoggedIn}=require('../middlewares');
-const {join, login,logout}=require('../controllers/auth');
+
+const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
+const {login,join,logout}=require('../controllers/auth.js')
 
 const router=express.Router();
 

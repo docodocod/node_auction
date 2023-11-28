@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 class Auction extends Sequelize.Model {
-    static initiate(sequelize) {
-        Auction.init({
+    static init(sequelize) {
+        return super.init({
             bid: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

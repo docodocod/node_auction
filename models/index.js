@@ -1,15 +1,16 @@
 const Sequelize=require('sequelize');
 const env=process.env.NODE_ENV || 'development';
-const fs=require('fs');
-const path=require('path');
-const config=require('../config/config')[env];
-const {User}=require('./user');
-const {Good}=require('./good');
-const {Auction}=require('./auction');
+const config=require('../config/config.json')[env];
+const User=require('./user');
+const Good=require('./good');
+const Auction=require('./auction');
 
 const db={};
 const sequelize = new Sequelize(
-    config.database,config.username,config.password,config,
+    config.database,
+    config.username,
+    config.password,
+    config,
 );
 
 db.sequelize=sequelize;

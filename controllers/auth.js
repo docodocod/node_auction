@@ -3,9 +3,9 @@ const User=require('../models/user');
 const jwt=require("jsonwebtoken");
 
 exports.join=async(req,res,next)=>{
-    const {email, nick,password,money}=req.body;
+    const {email, nick, password, money}=req.body;
     try{
-        const exUser=await User.findOne({where: {email}});
+        const exUser=await User.findOne( { where: { email } });
         if(exUser){
             return res.redirect('/join?error=이미 가입된 이메일입니다.');
         }

@@ -12,10 +12,12 @@ const indexRouter=require('./routes/index');
 const authRouter=require('./routes/auth');
 const {sequelize} =require('./models');
 const passportConfig=require('./passport');
+const sse=require('./sse'); //스케쥴링 npm
+const webSocket=require('./socket');
+const checkAuction=require('./checkAuction');
 
 const app=express();
-passportConfig();
-app.set('port',process.env.PORT||8010);
+app.set('port',process.env.PORT||8011);
 app.set('view engine','html');
 nunjucks.configure('views',{
     express: app,
@@ -53,9 +55,9 @@ app.use('/',indexRouter);
 app.use('/auth',authRouter);
 
 app.use((req,res,next)=>{
-    const error=new Error(`${req.method} ${req.url} 라우터가 없습니다`);
-    error.status=404;
-    next(error);
+        const error=new Error(`${req.method} ${req.url} 라우터가 없습니다`);
+        error.status=404;
+        next(error);
 })
 
 app.use((err,req,res,next)=>{
@@ -65,7 +67,10 @@ app.use((err,req,res,next)=>{
     res.render('error');
 });
 
-app.listen(app.get('port'),()=>{
+const server=app.listen(app.get('port'),()=>{
     console.log(app.get('port'),'번 포트가 활성화 되었습니다.');
 })
+
+webSocket(server,app); //이번에는 실제 로그인한 닉네임으로 설정하기 때문에 sessionMiddleware 필요없음
+sse(server);
 

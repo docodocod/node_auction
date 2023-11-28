@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 class User extends Sequelize.Model {
-    static initiate(sequelize) {
-        User.init({
+    static init(sequelize){
+        return super.init({
             email: {
                 type: Sequelize.STRING(40),
                 allowNull: false,

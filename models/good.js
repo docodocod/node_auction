@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 class Good extends Sequelize.Model {
-    static initiate(sequelize) {
-        Good.init({
+    static init(sequelize) {
+        return super.init({
             name: {
                 type: Sequelize.STRING(40),
                 allowNull: false,
